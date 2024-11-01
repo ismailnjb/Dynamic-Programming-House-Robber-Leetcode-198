@@ -160,3 +160,29 @@ def max_non_adjacent_sum_dynamic_programming(arr):
 
 # Example usage
 print("Max sum (dynamic programming):", max_non_adjacent_sum_dynamic_programming(arr))  # Output should be 13
+
+
+def max_non_adjacent_sum_tabulation(arr):
+    # Edge cases: empty array or single element array
+    if not arr:
+        return 0
+    elif len(arr) == 1:
+        return arr[0]
+
+    # Initialize DP table with the length of the array
+    dp = [0] * len(arr)
+    
+    # Base cases
+    dp[0] = arr[0]
+    dp[1] = max(arr[0], arr[1])
+
+    # Fill the DP table by iterating through the array
+    for i in range(2, len(arr)):
+        dp[i] = max(arr[i] + dp[i - 2], dp[i - 1])
+    
+    # The last element in dp array holds the result
+    return dp[-1]
+
+# Example usage
+arr = [5, 3, 2, 4, 2, 4]
+print("Max non-adjacent sum (tabulation):", max_non_adjacent_sum_tabulation(arr))  # Output should be 13
